@@ -29,7 +29,8 @@
 - 미출시한 게임을 출시일 예약한 경우의 처리와 메시징
 
 ## ERD
-![gamecommu](https://github.com/Ameri-Kano/GameCommu/assets/81066717/b5350fba-7c35-4ca8-8ae4-4a253be60492)
+![image](https://github.com/Ameri-Kano/GameCommu/assets/81066717/3054d821-a0bb-4de3-8629-c5b865145b5a)
+
 
 ## 사용 기술
 - GIT
