@@ -1,6 +1,7 @@
 package com.amerikano.gamecommu.domain.entity;
 
 import com.amerikano.gamecommu.domain.dto.user.JoinForm;
+import com.amerikano.gamecommu.encryption.CryptoUtil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,7 +41,7 @@ public class User extends BaseEntity {
   public static User from(JoinForm joinForm) {
     return User.builder()
         .email(joinForm.getEmail())
-        .password(joinForm.getPassword())
+        .password(CryptoUtil.encrypt(joinForm.getPassword()))
         .name(joinForm.getName())
         .birth(joinForm.getBirth())
         .phone(joinForm.getPhone())
