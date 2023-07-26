@@ -1,5 +1,6 @@
 package com.amerikano.gamecommu.domain.entity;
 
+import com.amerikano.gamecommu.domain.dto.user.JoinForm;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,6 +22,7 @@ import lombok.Setter;
 public class User extends BaseEntity {
 
   @Id
+  @Column()
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
@@ -35,4 +37,13 @@ public class User extends BaseEntity {
 
   private LocalDate birth;
 
+  public static User from(JoinForm joinForm) {
+    return User.builder()
+        .email(joinForm.getEmail())
+        .password(joinForm.getPassword())
+        .name(joinForm.getName())
+        .birth(joinForm.getBirth())
+        .phone(joinForm.getPhone())
+        .build();
+  }
 }
