@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,13 +36,16 @@ public class Review extends BaseEntity {
 
   private String title;
 
+  @Lob
+  @Column(columnDefinition = "TEXT")
   private String text;
 
-  private Double rate;
+  @Column(columnDefinition = "double default 0.0")
+  private double rate;
 
-  @Column(name = "like_count")
-  private Integer likes;
-  @Column(name = "dislike_count")
-  private Integer dislikes;
+  @Column(name = "like_count", columnDefinition = "int default 0")
+  private int likes;
+  @Column(name = "dislike_count", columnDefinition = "int default 0")
+  private int dislikes;
 
 }

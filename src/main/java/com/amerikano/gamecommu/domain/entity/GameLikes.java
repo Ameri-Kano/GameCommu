@@ -2,6 +2,8 @@ package com.amerikano.gamecommu.domain.entity;
 
 import com.amerikano.gamecommu.domain.type.LikeStatus;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,6 +29,7 @@ public class GameLikes {
 
   private Long gameId;
 
+  @Enumerated(value = EnumType.STRING)
   private LikeStatus likeStatus;
 
 }

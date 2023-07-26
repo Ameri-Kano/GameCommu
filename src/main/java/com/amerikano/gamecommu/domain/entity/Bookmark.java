@@ -34,4 +34,5 @@ public class Bookmark extends BaseEntity {
   private List<Game> games;
 
   private String memo;
+
 }

@@ -3,6 +3,8 @@ package com.amerikano.gamecommu.domain.entity;
 import com.amerikano.gamecommu.domain.type.ReleaseStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,13 +38,15 @@ public class Game extends BaseEntity {
 
   private Double rate;
 
-  @Column(name = "like_count")
-  private Integer likes;
-  @Column(name = "dislike_count")
-  private Integer dislikes;
+  @Column(name = "like_count", columnDefinition = "int default 0")
+  private int likes;
+  @Column(name = "dislike_count", columnDefinition = "int default 0")
+  private int dislikes;
 
-  private LocalDateTime releasedDate;
+  @Column(name = "released_datetime")
+  private LocalDateTime releasedDateTime;
 
+  @Enumerated(value = EnumType.STRING)
   private ReleaseStatus releaseStatus;
 
 }
