@@ -1,7 +1,7 @@
 package com.amerikano.gamecommu.controller.user;
 
 import com.amerikano.gamecommu.domain.dto.user.JoinForm;
-import com.amerikano.gamecommu.service.UserService;
+import com.amerikano.gamecommu.service.user.JoinService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class JoinController {
 
-  private final UserService userService;
+  private final JoinService joinService;
 
   @PostMapping
   public ResponseEntity<String> joinUser(@RequestBody JoinForm joinForm) {
-    return ResponseEntity.ok(userService.joinUser(joinForm));
+    return ResponseEntity.ok(joinService.joinUser(joinForm));
   }
 }

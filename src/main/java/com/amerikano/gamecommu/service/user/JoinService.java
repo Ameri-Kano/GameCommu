@@ -1,4 +1,4 @@
-package com.amerikano.gamecommu.service;
+package com.amerikano.gamecommu.service.user;
 
 import com.amerikano.gamecommu.domain.dto.user.JoinForm;
 import com.amerikano.gamecommu.domain.entity.User;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class JoinService {
 
   private final UserRepository userRepository;
 
