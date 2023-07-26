@@ -80,7 +80,7 @@ public class JwtAuthService {
    * JWT 토큰에서 고유 id 값 얻어오기
    *
    * <p>Param: JWT Token String</p>
-   * <p>Return: 토큰에 포함된 유저(점장, 손님) 고유 id</p>
+   * <p>Return: 토큰에 포함된 유저 고유 id</p>
    */
   public Long getIdFromToken(String token) {
     return getUserInfoFromToken(token.substring(7)).getId();
