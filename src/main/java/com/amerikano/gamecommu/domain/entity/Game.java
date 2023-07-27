@@ -36,7 +36,8 @@ public class Game extends BaseEntity {
 
   private String developer;
 
-  private Double rate;
+  @Column(columnDefinition = "double default 0.0")
+  private double rate;
 
   @Column(name = "like_count", columnDefinition = "int default 0")
   private int likes;
