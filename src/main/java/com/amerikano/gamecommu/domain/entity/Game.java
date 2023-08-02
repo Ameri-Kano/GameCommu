@@ -8,7 +8,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -29,14 +29,15 @@ public class Game extends BaseEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @OneToMany
+  @ManyToMany
   private List<Genre> genres;
 
   private String title;
 
   private String developer;
 
-  private Double rate;
+  @Column(columnDefinition = "double default 0.0")
+  private double rate;
 
   @Column(name = "like_count", columnDefinition = "int default 0")
   private int likes;
