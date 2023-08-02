@@ -13,24 +13,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/games")
+@RequestMapping("/games/info")
 @RestController
 @RequiredArgsConstructor
 public class GameInfoController {
 
   private final GameInfoService gameInfoService;
 
-  @PostMapping("/register")
+  @PostMapping
   ResponseEntity<ResponseDto> registerGameInfo(@RequestBody RequestDto requestDto) {
     return ResponseEntity.ok(gameInfoService.registerGameInfo(requestDto));
   }
 
-  @PutMapping("/modify")
+  @PutMapping
   ResponseEntity<ResponseDto> modifyGameInfo(@RequestBody ModifyGame.RequestDto requestDto) {
     return ResponseEntity.ok(gameInfoService.modifyGameInfo(requestDto));
   }
 
-  @PutMapping("/delete")
+  @PutMapping("deletion")
   ResponseEntity<String> deleteGameInfo(@RequestParam Long id) {
     return ResponseEntity.ok(gameInfoService.deleteGameInfo(id));
   }
