@@ -32,7 +32,7 @@ public class Review extends BaseEntity {
 
   @ManyToOne
   @JoinColumn(name = "game_id")
-  private Game Game;
+  private Game game;
 
   private String title;
 
