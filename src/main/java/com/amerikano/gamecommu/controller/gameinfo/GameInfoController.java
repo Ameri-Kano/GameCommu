@@ -20,17 +20,17 @@ public class GameInfoController {
 
   private final GameInfoService gameInfoService;
 
-  @PostMapping("/register")
+  @PostMapping("/info")
   ResponseEntity<ResponseDto> registerGameInfo(@RequestBody RequestDto requestDto) {
     return ResponseEntity.ok(gameInfoService.registerGameInfo(requestDto));
   }
 
-  @PutMapping("/modify")
+  @PutMapping("/info")
   ResponseEntity<ResponseDto> modifyGameInfo(@RequestBody ModifyGame.RequestDto requestDto) {
     return ResponseEntity.ok(gameInfoService.modifyGameInfo(requestDto));
   }
 
-  @PutMapping("/delete")
+  @PutMapping("/info/deletion")
   ResponseEntity<String> deleteGameInfo(@RequestParam Long id) {
     return ResponseEntity.ok(gameInfoService.deleteGameInfo(id));
   }
