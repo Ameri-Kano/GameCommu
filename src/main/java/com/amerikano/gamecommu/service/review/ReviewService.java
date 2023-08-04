@@ -19,21 +19,26 @@ public class ReviewService {
   private final GameRepository gameRepository;
   private final UserRepository userRepository;
 
+  @Transactional
   public ReviewDto registerGameReview(Long userId, ReviewDto reviewDto) {
 
     User user = getUserEntity(userId);
 
     Game game = getGameEntity(reviewDto.getGameId());
 
+    double rateValue = reviewDto.getRate().getValue();
+
     Review newReview = Review.builder()
         .user(user)
         .game(game)
         .title(reviewDto.getTitle())
         .text(reviewDto.getText())
-        .rate(reviewDto.getRate().getValue())
+        .rate(rateValue)
         .build();
 
     reviewRepository.save(newReview);
+
+    setGameRate(game);
 
     return reviewDto;
   }
@@ -51,6 +56,8 @@ public class ReviewService {
     review.setText(reviewDto.getText());
     review.setRate(reviewDto.getRate().getValue());
 
+    setGameRate(game);
+
     return reviewDto;
   }
 
@@ -65,6 +72,8 @@ public class ReviewService {
 
     reviewRepository.delete(review);
 
+    setGameRate(game);
+
     return "리뷰 삭제가 완료되었습니다.";
   }
 
@@ -76,5 +85,15 @@ public class ReviewService {
   private Game getGameEntity(Long gameId) {
     return gameRepository.findById(gameId)
         .orElseThrow(() -> new RuntimeException("해당하는 게임이 존재하지 않습니다."));
+  }
+
+  private void setGameRate(Game game) {
+    double avgRate = reviewRepository.findAllByGame(game)
+        .stream()
+        .mapToDouble(Review::getRate)
+        .average()
+        .orElse(0.0);
+
+    game.setRate(avgRate);
   }
 }
