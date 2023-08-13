@@ -27,9 +27,9 @@ public class ReviewLikes {
 
   private Long userId;
 
-  private Long gameId;
+  private Long reviewId;
 
-  @Enumerated(EnumType.ORDINAL)
+  @Enumerated(EnumType.STRING)
   private LikeStatus likeStatus;
 
 }
