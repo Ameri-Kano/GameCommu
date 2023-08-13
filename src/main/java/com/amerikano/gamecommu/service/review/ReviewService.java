@@ -7,6 +7,7 @@ import com.amerikano.gamecommu.domain.entity.User;
 import com.amerikano.gamecommu.domain.repository.GameRepository;
 import com.amerikano.gamecommu.domain.repository.ReviewRepository;
 import com.amerikano.gamecommu.domain.repository.UserRepository;
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,17 +47,18 @@ public class ReviewService {
   @Transactional
   public ReviewDto modifyGameReview(Long userId, ReviewDto reviewDto) {
 
-    User user = getUserEntity(userId);
-    Game game = getGameEntity(reviewDto.getGameId());
+    Review review = reviewRepository.findById(reviewDto.getReviewId())
+            .orElseThrow(() -> new RuntimeException("해당하는 리뷰가 존재하지 않습니다."));
 
-    Review review = reviewRepository.findByUserAndGame(user, game)
-        .orElseThrow(() -> new RuntimeException("해당하는 리뷰가 존재하지 않습니다."));
+    if (!Objects.equals(review.getUser().getId(), userId)) {
+      throw new RuntimeException("해당 유저가 작성한 리뷰가 아닙니다.");
+    }
 
     review.setTitle(reviewDto.getTitle());
     review.setText(reviewDto.getText());
     review.setRate(reviewDto.getRate().getValue());
 
-    setGameRate(game);
+    setGameRate(review.getGame());
 
     return reviewDto;
   }
@@ -68,7 +70,7 @@ public class ReviewService {
     Game game = getGameEntity(gameId);
 
     Review review = reviewRepository.findByUserAndGame(user, game)
-        .orElseThrow(() -> new RuntimeException("해당하는 리뷰가 존재하지 않습니다."));
+            .orElseThrow(() -> new RuntimeException("해당하는 리뷰 정보가 존재하지 않습니다."));
 
     reviewRepository.delete(review);
 

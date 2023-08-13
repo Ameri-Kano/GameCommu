@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ReviewDto {
 
+  private Long reviewId;
   private Long gameId;
   private String title;
   private String text;
